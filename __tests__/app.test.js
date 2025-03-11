@@ -55,7 +55,7 @@ describe("GET /api/topics", () => {
   })
 })
 
-describe("GET /api/articles", () => {
+describe.only("GET /api/articles", () => {
   test('200: responds with an array containing correct data on all articles', () => {
     return request(app)
     .get('/api/articles')
@@ -76,6 +76,15 @@ describe("GET /api/articles", () => {
         expect(article).toHaveProperty("comment_count")
         expect(article).not.toHaveProperty("body")
       })
+    })
+  });
+  test('200: responds with an array containing correct data on all articles', () => {
+    return request(app)
+    .get('/api/articles?sort_by=author')
+    .expect(200)
+    .then(({ body : { articles } }) => {
+      expect(articles.length).toBeGreaterThan(0)
+      expect(articles).toBeSortedBy("author")
     })
   });  
 });
