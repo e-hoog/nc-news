@@ -55,7 +55,7 @@ describe("GET /api/topics", () => {
   })
 })
 
-describe.only("GET /api/articles", () => {
+describe("GET /api/articles", () => {
   test('200: responds with an array containing correct data on all articles', () => {
     return request(app)
     .get('/api/articles')
@@ -78,15 +78,35 @@ describe.only("GET /api/articles", () => {
       })
     })
   });
-  test('200: responds with an array containing correct data on all articles', () => {
+  test('200: responds with an array containing correct data sorted by given parameter', () => {
     return request(app)
     .get('/api/articles?sort_by=author')
     .expect(200)
     .then(({ body : { articles } }) => {
       expect(articles.length).toBeGreaterThan(0)
-      expect(articles).toBeSortedBy("author")
+      expect(articles).toBeSortedBy("author", {
+        descending: true
+      })
     })
-  });  
+  });
+  test('200: responds with an array containing correct data ordered by given parameter', () => {
+    return request(app)
+    .get('/api/articles?order=asc')
+    .expect(200)
+    .then(({ body : { articles } }) => {
+      expect(articles.length).toBeGreaterThan(0)
+      expect(articles).toBeSortedBy("created_at")
+    })
+  });
+  test('200: responds with an array containing correct data sorted and ordered by given parameter if given multiple parameters', () => {
+    return request(app)
+    .get('/api/articles?sort_by=title&order=asc')
+    .expect(200)
+    .then(({ body : { articles } }) => {
+      expect(articles.length).toBeGreaterThan(0)
+      expect(articles).toBeSortedBy("title")
+    })
+  });
 });
 
 describe("GET /api/articles/:article_id", () => {
