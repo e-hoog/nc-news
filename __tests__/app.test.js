@@ -120,6 +120,25 @@ describe("GET /api/articles", () => {
       })
     })
   });
+  test('200: responds with an array containing correct data only on articles with the given topic if the topic exists', () => {
+    return request(app)
+    .get('/api/articles?topic=cats')
+    .expect(200)
+    .then(({ body : { articles } }) => {
+      const article = articles[0]
+      expect(articles.length).toBe(1)
+      console.log(article)
+      expect(article).toHaveProperty("article_id", 5)
+      expect(article).toHaveProperty("title", "UNCOVERED: catspiracy to bring down democracy")
+      expect(article).toHaveProperty("topic", "cats")
+      expect(article).toHaveProperty("author", "rogersop")
+      expect(article).toHaveProperty("created_at", "2020-08-03T13:14:00.000Z")
+      expect(article).toHaveProperty("votes", 0)
+      expect(article).toHaveProperty("article_img_url", "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700")
+      expect(article).toHaveProperty("comment_count", "2")
+      expect(article).not.toHaveProperty("body")
+    })
+  })
   test('200: responds with an array containing correct data sorted and ordered by given parameter if given multiple parameters', () => {
     return request(app)
     .get('/api/articles?sort_by=title&order=asc')
@@ -138,7 +157,7 @@ describe("GET /api/articles", () => {
         expect(article).toHaveProperty("comment_count")
         expect(article).not.toHaveProperty("body")
       })
-    })
+  });
   });
   test("400: responds with an error message if passed sortby query is not the name of a column", () => {
     return request(app)

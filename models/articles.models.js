@@ -1,12 +1,17 @@
 const db = require("../db/connection")
 
 exports.selectArticles = (queries) => {
-    const { sort_by, order } = queries
+    const { sort_by, order, topic } = queries
     const articlesColumns = ["article_id", "title", "topic", "author", "created_at", "votes", "comment_count"]
     let queryStr = `SELECT articles.article_id, title, topic, articles.author, articles.created_at, articles.votes, article_img_url, COUNT(comment_id) AS comment_count 
         FROM articles 
-        LEFT JOIN comments ON articles.article_id = comments.article_id
-        GROUP BY articles.article_id`
+        LEFT JOIN comments ON articles.article_id = comments.article_id`
+    let queryValues = []
+    if(topic) {
+        queryValues.push(topic)
+        queryStr += ` WHERE topic = $1`
+    }
+    queryStr += ` GROUP BY articles.article_id`
     if(sort_by) {
         if (!articlesColumns.includes(sort_by)) {
             return Promise.reject({ status: 400, msg: "Bad Request" });
@@ -25,7 +30,7 @@ exports.selectArticles = (queries) => {
     else {
         queryStr += ` DESC`
     }
-    return db.query(queryStr)
+    return db.query(queryStr, queryValues)
     .then(({ rows }) => {
         return rows
     })
