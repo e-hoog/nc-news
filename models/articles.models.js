@@ -9,7 +9,7 @@ exports.selectArticles = (queries) => {
         GROUP BY articles.article_id`
     if(sort_by) {
         if (!articlesColumns.includes(sort_by)) {
-            return Promise.reject({ status: 404, msg: "Invalid Input" });
+            return Promise.reject({ status: 400, msg: "Bad Request" });
         };
         queryStr += ` ORDER BY ${sort_by}`
     }
@@ -18,7 +18,7 @@ exports.selectArticles = (queries) => {
     }
     if(order) {
         if(order !== "asc" && order !== "desc") {
-            return Promise.reject({ status: 404, msg: "Invalid Input" });
+            return Promise.reject({ status: 400, msg: "Bad Request" });
         }
         queryStr += ` ${order}`
     }

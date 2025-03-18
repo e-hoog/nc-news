@@ -87,6 +87,17 @@ describe("GET /api/articles", () => {
       expect(articles).toBeSortedBy("author", {
         descending: true
       })
+      articles.forEach((article) => {
+        expect(article).toHaveProperty("article_id")
+        expect(article).toHaveProperty("title")
+        expect(article).toHaveProperty("topic")
+        expect(article).toHaveProperty("author")
+        expect(article).toHaveProperty("created_at")
+        expect(article).toHaveProperty("votes")
+        expect(article).toHaveProperty("article_img_url")
+        expect(article).toHaveProperty("comment_count")
+        expect(article).not.toHaveProperty("body")
+      })
     })
   });
   test('200: responds with an array containing correct data ordered by given parameter', () => {
@@ -96,6 +107,17 @@ describe("GET /api/articles", () => {
     .then(({ body : { articles } }) => {
       expect(articles.length).toBeGreaterThan(0)
       expect(articles).toBeSortedBy("created_at")
+      articles.forEach((article) => {
+        expect(article).toHaveProperty("article_id")
+        expect(article).toHaveProperty("title")
+        expect(article).toHaveProperty("topic")
+        expect(article).toHaveProperty("author")
+        expect(article).toHaveProperty("created_at")
+        expect(article).toHaveProperty("votes")
+        expect(article).toHaveProperty("article_img_url")
+        expect(article).toHaveProperty("comment_count")
+        expect(article).not.toHaveProperty("body")
+      })
     })
   });
   test('200: responds with an array containing correct data sorted and ordered by given parameter if given multiple parameters', () => {
@@ -105,7 +127,34 @@ describe("GET /api/articles", () => {
     .then(({ body : { articles } }) => {
       expect(articles.length).toBeGreaterThan(0)
       expect(articles).toBeSortedBy("title")
+      articles.forEach((article) => {
+        expect(article).toHaveProperty("article_id")
+        expect(article).toHaveProperty("title")
+        expect(article).toHaveProperty("topic")
+        expect(article).toHaveProperty("author")
+        expect(article).toHaveProperty("created_at")
+        expect(article).toHaveProperty("votes")
+        expect(article).toHaveProperty("article_img_url")
+        expect(article).toHaveProperty("comment_count")
+        expect(article).not.toHaveProperty("body")
+      })
     })
+  });
+  test("400: responds with an error message if passed sortby query is not the name of a column", () => {
+    return request(app)
+    .get('/api/articles?sort_by=notAColumn')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body).toHaveProperty("msg", "Bad Request");
+      });
+  });
+  test("400: responds with an error message if passed order query is not asc or desc", () => {
+    return request(app)
+    .get('/api/articles?sort_by=title&order=notAnOrder')
+      .expect(400)
+      .then(({ body }) => {
+        expect(body).toHaveProperty("msg", "Bad Request");
+      });
   });
 });
 
