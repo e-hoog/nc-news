@@ -1,6 +1,7 @@
 const db = require("../db/connection")
+const { checkValueExists } = require("../utils.app")
 
-exports.selectArticles = (queries) => {
+exports.selectArticles = async(queries) => {
     const { sort_by, order, topic } = queries
     const articlesColumns = ["article_id", "title", "topic", "author", "created_at", "votes", "comment_count"]
     let queryStr = `SELECT articles.article_id, title, topic, articles.author, articles.created_at, articles.votes, article_img_url, COUNT(comment_id) AS comment_count 
@@ -8,6 +9,7 @@ exports.selectArticles = (queries) => {
         LEFT JOIN comments ON articles.article_id = comments.article_id`
     let queryValues = []
     if(topic) {
+        await checkValueExists("topics", "slug", topic)
         queryValues.push(topic)
         queryStr += ` WHERE topic = $1`
     }

@@ -127,7 +127,6 @@ describe("GET /api/articles", () => {
     .then(({ body : { articles } }) => {
       const article = articles[0]
       expect(articles.length).toBe(1)
-      console.log(article)
       expect(article).toHaveProperty("article_id", 5)
       expect(article).toHaveProperty("title", "UNCOVERED: catspiracy to bring down democracy")
       expect(article).toHaveProperty("topic", "cats")
@@ -139,9 +138,17 @@ describe("GET /api/articles", () => {
       expect(article).not.toHaveProperty("body")
     })
   })
-  test('200: responds with an array containing correct data sorted and ordered by given parameter if given multiple parameters', () => {
+  test("200: responds with an empty array when passed topic query is present in the topics table but has no articles", () => {
     return request(app)
-    .get('/api/articles?sort_by=title&order=asc')
+      .get("/api/articles?topic=paper")
+      .expect(200)
+      .then(({ body: { articles } }) => {
+        expect(articles).toEqual([]);
+      });
+  });
+  test('200: responds with an array containing correct data only on articles with the given topic sorted and ordered by given parameters if given multiple parameters', () => {
+    return request(app)
+    .get('/api/articles?sort_by=title&order=asc&topic=mitch')
     .expect(200)
     .then(({ body : { articles } }) => {
       expect(articles.length).toBeGreaterThan(0)
@@ -173,6 +180,14 @@ describe("GET /api/articles", () => {
       .expect(400)
       .then(({ body }) => {
         expect(body).toHaveProperty("msg", "Bad Request");
+      });
+  });
+  test("404: responds with an error message when passed topic query is not present in the topics table", () => {
+    return request(app)
+      .get("/api/articles?topic=notATopic")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body).toHaveProperty("msg", "Not Found");
       });
   });
 });
