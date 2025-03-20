@@ -58,85 +58,85 @@ describe("GET /api/topics", () => {
 describe("GET /api/articles", () => {
   test('200: responds with an array containing correct data on all articles', () => {
     return request(app)
-    .get('/api/articles')
-    .expect(200)
-    .then(({ body : { articles } }) => {
-      expect(articles.length).toBeGreaterThan(0)
-      expect(articles).toBeSortedBy("created_at", {
-        descending: true
+      .get('/api/articles')
+      .expect(200)
+      .then(({ body: { articles } }) => {
+        expect(articles.length).toBeGreaterThan(0)
+        expect(articles).toBeSortedBy("created_at", {
+          descending: true
+        })
+        articles.forEach((article) => {
+          expect(article).toHaveProperty("article_id")
+          expect(article).toHaveProperty("title")
+          expect(article).toHaveProperty("topic")
+          expect(article).toHaveProperty("author")
+          expect(article).toHaveProperty("created_at")
+          expect(article).toHaveProperty("votes")
+          expect(article).toHaveProperty("article_img_url")
+          expect(article).toHaveProperty("comment_count")
+          expect(article).not.toHaveProperty("body")
+        })
       })
-      articles.forEach((article) => {
-        expect(article).toHaveProperty("article_id")
-        expect(article).toHaveProperty("title")
-        expect(article).toHaveProperty("topic")
-        expect(article).toHaveProperty("author")
-        expect(article).toHaveProperty("created_at")
-        expect(article).toHaveProperty("votes")
-        expect(article).toHaveProperty("article_img_url")
-        expect(article).toHaveProperty("comment_count")
-        expect(article).not.toHaveProperty("body")
-      })
-    })
   });
   test('200: responds with an array containing correct data sorted by given parameter', () => {
     return request(app)
-    .get('/api/articles?sort_by=author')
-    .expect(200)
-    .then(({ body : { articles } }) => {
-      expect(articles.length).toBeGreaterThan(0)
-      expect(articles).toBeSortedBy("author", {
-        descending: true
+      .get('/api/articles?sort_by=author')
+      .expect(200)
+      .then(({ body: { articles } }) => {
+        expect(articles.length).toBeGreaterThan(0)
+        expect(articles).toBeSortedBy("author", {
+          descending: true
+        })
+        articles.forEach((article) => {
+          expect(article).toHaveProperty("article_id")
+          expect(article).toHaveProperty("title")
+          expect(article).toHaveProperty("topic")
+          expect(article).toHaveProperty("author")
+          expect(article).toHaveProperty("created_at")
+          expect(article).toHaveProperty("votes")
+          expect(article).toHaveProperty("article_img_url")
+          expect(article).toHaveProperty("comment_count")
+          expect(article).not.toHaveProperty("body")
+        })
       })
-      articles.forEach((article) => {
-        expect(article).toHaveProperty("article_id")
-        expect(article).toHaveProperty("title")
-        expect(article).toHaveProperty("topic")
-        expect(article).toHaveProperty("author")
-        expect(article).toHaveProperty("created_at")
-        expect(article).toHaveProperty("votes")
-        expect(article).toHaveProperty("article_img_url")
-        expect(article).toHaveProperty("comment_count")
-        expect(article).not.toHaveProperty("body")
-      })
-    })
   });
   test('200: responds with an array containing correct data ordered by given parameter', () => {
     return request(app)
-    .get('/api/articles?order=asc')
-    .expect(200)
-    .then(({ body : { articles } }) => {
-      expect(articles.length).toBeGreaterThan(0)
-      expect(articles).toBeSortedBy("created_at")
-      articles.forEach((article) => {
-        expect(article).toHaveProperty("article_id")
-        expect(article).toHaveProperty("title")
-        expect(article).toHaveProperty("topic")
-        expect(article).toHaveProperty("author")
-        expect(article).toHaveProperty("created_at")
-        expect(article).toHaveProperty("votes")
-        expect(article).toHaveProperty("article_img_url")
-        expect(article).toHaveProperty("comment_count")
-        expect(article).not.toHaveProperty("body")
+      .get('/api/articles?order=asc')
+      .expect(200)
+      .then(({ body: { articles } }) => {
+        expect(articles.length).toBeGreaterThan(0)
+        expect(articles).toBeSortedBy("created_at")
+        articles.forEach((article) => {
+          expect(article).toHaveProperty("article_id")
+          expect(article).toHaveProperty("title")
+          expect(article).toHaveProperty("topic")
+          expect(article).toHaveProperty("author")
+          expect(article).toHaveProperty("created_at")
+          expect(article).toHaveProperty("votes")
+          expect(article).toHaveProperty("article_img_url")
+          expect(article).toHaveProperty("comment_count")
+          expect(article).not.toHaveProperty("body")
+        })
       })
-    })
   });
   test('200: responds with an array containing correct data only on articles with the given topic if the topic exists', () => {
     return request(app)
-    .get('/api/articles?topic=cats')
-    .expect(200)
-    .then(({ body : { articles } }) => {
-      const article = articles[0]
-      expect(articles.length).toBe(1)
-      expect(article).toHaveProperty("article_id", 5)
-      expect(article).toHaveProperty("title", "UNCOVERED: catspiracy to bring down democracy")
-      expect(article).toHaveProperty("topic", "cats")
-      expect(article).toHaveProperty("author", "rogersop")
-      expect(article).toHaveProperty("created_at", "2020-08-03T13:14:00.000Z")
-      expect(article).toHaveProperty("votes", 0)
-      expect(article).toHaveProperty("article_img_url", "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700")
-      expect(article).toHaveProperty("comment_count", "2")
-      expect(article).not.toHaveProperty("body")
-    })
+      .get('/api/articles?topic=cats')
+      .expect(200)
+      .then(({ body: { articles } }) => {
+        const article = articles[0]
+        expect(articles.length).toBe(1)
+        expect(article).toHaveProperty("article_id", 5)
+        expect(article).toHaveProperty("title", "UNCOVERED: catspiracy to bring down democracy")
+        expect(article).toHaveProperty("topic", "cats")
+        expect(article).toHaveProperty("author", "rogersop")
+        expect(article).toHaveProperty("created_at", "2020-08-03T13:14:00.000Z")
+        expect(article).toHaveProperty("votes", 0)
+        expect(article).toHaveProperty("article_img_url", "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700")
+        expect(article).toHaveProperty("comment_count", "2")
+        expect(article).not.toHaveProperty("body")
+      })
   })
   test("200: responds with an empty array when passed topic query is present in the topics table but has no articles", () => {
     return request(app)
@@ -148,27 +148,27 @@ describe("GET /api/articles", () => {
   });
   test('200: responds with an array containing correct data only on articles with the given topic sorted and ordered by given parameters if given multiple parameters', () => {
     return request(app)
-    .get('/api/articles?sort_by=title&order=asc&topic=mitch')
-    .expect(200)
-    .then(({ body : { articles } }) => {
-      expect(articles.length).toBeGreaterThan(0)
-      expect(articles).toBeSortedBy("title")
-      articles.forEach((article) => {
-        expect(article).toHaveProperty("article_id")
-        expect(article).toHaveProperty("title")
-        expect(article).toHaveProperty("topic")
-        expect(article).toHaveProperty("author")
-        expect(article).toHaveProperty("created_at")
-        expect(article).toHaveProperty("votes")
-        expect(article).toHaveProperty("article_img_url")
-        expect(article).toHaveProperty("comment_count")
-        expect(article).not.toHaveProperty("body")
-      })
-  });
+      .get('/api/articles?sort_by=title&order=asc&topic=mitch')
+      .expect(200)
+      .then(({ body: { articles } }) => {
+        expect(articles.length).toBeGreaterThan(0)
+        expect(articles).toBeSortedBy("title")
+        articles.forEach((article) => {
+          expect(article).toHaveProperty("article_id")
+          expect(article).toHaveProperty("title")
+          expect(article).toHaveProperty("topic")
+          expect(article).toHaveProperty("author")
+          expect(article).toHaveProperty("created_at")
+          expect(article).toHaveProperty("votes")
+          expect(article).toHaveProperty("article_img_url")
+          expect(article).toHaveProperty("comment_count")
+          expect(article).not.toHaveProperty("body")
+        })
+      });
   });
   test("400: responds with an error message if passed sortby query is not the name of a column", () => {
     return request(app)
-    .get('/api/articles?sort_by=notAColumn')
+      .get('/api/articles?sort_by=notAColumn')
       .expect(400)
       .then(({ body }) => {
         expect(body).toHaveProperty("msg", "Bad Request");
@@ -176,7 +176,7 @@ describe("GET /api/articles", () => {
   });
   test("400: responds with an error message if passed order query is not asc or desc", () => {
     return request(app)
-    .get('/api/articles?sort_by=title&order=notAnOrder')
+      .get('/api/articles?sort_by=title&order=notAnOrder')
       .expect(400)
       .then(({ body }) => {
         expect(body).toHaveProperty("msg", "Bad Request");
@@ -198,7 +198,7 @@ describe("GET /api/articles/:article_id", () => {
       .get('/api/articles/3')
       .expect(200)
       .then(({ body: { article } }) => {
-        const { author, title, article_id, body, topic, created_at, votes, article_img_url } = article
+        const { author, title, article_id, body, topic, created_at, votes, article_img_url, comment_count } = article
         expect(article_id).toBe(3)
         expect(typeof author).toBe('string')
         expect(typeof title).toBe('string')
@@ -207,6 +207,7 @@ describe("GET /api/articles/:article_id", () => {
         expect(typeof created_at).toBe('string')
         expect(typeof votes).toBe('number')
         expect(typeof article_img_url).toBe('string')
+        expect(comment_count).toBe("2")
       })
   })
   test("404: responds with an error message when passed an id not in the database", () => {
@@ -275,25 +276,25 @@ describe("POST /api/articles/:article_id/comments", () => {
     return request(app)
       .post('/api/articles/3/comments')
       .send({
-        username : "butter_bridge",
-        body : "this one really speaks to me as a person"
+        username: "butter_bridge",
+        body: "this one really speaks to me as a person"
       })
       .expect(201)
       .then(({ body: { comment } }) => {
-          expect(comment).toHaveProperty("comment_id")
-          expect(comment).toHaveProperty("votes")
-          expect(comment).toHaveProperty("created_at")
-          expect(comment).toHaveProperty("author")
-          expect(comment).toHaveProperty("body")
-          expect(comment).toHaveProperty("article_id", 3)
+        expect(comment).toHaveProperty("comment_id")
+        expect(comment).toHaveProperty("votes")
+        expect(comment).toHaveProperty("created_at")
+        expect(comment).toHaveProperty("author")
+        expect(comment).toHaveProperty("body")
+        expect(comment).toHaveProperty("article_id", 3)
       })
   })
   test("404: responds with an error message when passed id not present in the articles table", () => {
     return request(app)
       .post("/api/articles/10000/comments")
       .send({
-        username : "icellusedkars",
-        body : "great stuff"
+        username: "icellusedkars",
+        body: "great stuff"
       })
       .expect(404)
       .then(({ body }) => {
@@ -304,8 +305,8 @@ describe("POST /api/articles/:article_id/comments", () => {
     return request(app)
       .post("/api/articles/notANumber/comments")
       .send({
-        username : "rogersop",
-        body : "I love news!"
+        username: "rogersop",
+        body: "I love news!"
       })
       .expect(400)
       .then(({ body }) => {
@@ -316,7 +317,7 @@ describe("POST /api/articles/:article_id/comments", () => {
     return request(app)
       .post("/api/articles/2/comments")
       .send({
-        username : "notAUsername",
+        username: "notAUsername",
         body: "wish I could comment here..."
       })
       .expect(404)
@@ -328,7 +329,7 @@ describe("POST /api/articles/:article_id/comments", () => {
     return request(app)
       .post("/api/articles/1/comments")
       .send({
-        username : 4,
+        username: 4,
         body: "this could use more numbers"
       })
       .expect(400)
@@ -360,13 +361,13 @@ describe("PATCH /api/articles/:article_id", () => {
       })
       .expect(200)
       .then(({ body: { article } }) => {
-          expect(article).toHaveProperty("title")
-          expect(article).toHaveProperty("topic")
-          expect(article).toHaveProperty("author")
-          expect(article).toHaveProperty("body")
-          expect(article).toHaveProperty("created_at")
-          expect(article).toHaveProperty("votes", 96)
-          expect(article).toHaveProperty("article_id", 1)
+        expect(article).toHaveProperty("title")
+        expect(article).toHaveProperty("topic")
+        expect(article).toHaveProperty("author")
+        expect(article).toHaveProperty("body")
+        expect(article).toHaveProperty("created_at")
+        expect(article).toHaveProperty("votes", 96)
+        expect(article).toHaveProperty("article_id", 1)
       })
   })
   test("404: responds with an error message when passed id not present in the articles table", () => {
@@ -423,9 +424,9 @@ describe('DELETE /api/comments/:comment_id', () => {
       .expect(204)
       .then(() => {
         return db.query(`SELECT * FROM comments WHERE comment_id = 3`)
-        .then(({ rows }) => {
-          expect(rows).toEqual([])
-        })
+          .then(({ rows }) => {
+            expect(rows).toEqual([])
+          })
       })
   });
   test("404: responds with an error message when passed id not present in the comments table", () => {
@@ -449,15 +450,15 @@ describe('DELETE /api/comments/:comment_id', () => {
 describe('GET /api/users', () => {
   test('200: responds with an array containing correct data on all users', () => {
     return request(app)
-    .get('/api/users')
-    .expect(200)
-    .then(({ body : { users } }) => {
-      expect(users.length).toBeGreaterThan(0)
-      users.forEach((user) => {
-        expect(user).toHaveProperty("username")
-        expect(user).toHaveProperty("name")
-        expect(user).toHaveProperty("avatar_url")
+      .get('/api/users')
+      .expect(200)
+      .then(({ body: { users } }) => {
+        expect(users.length).toBeGreaterThan(0)
+        users.forEach((user) => {
+          expect(user).toHaveProperty("username")
+          expect(user).toHaveProperty("name")
+          expect(user).toHaveProperty("avatar_url")
+        })
       })
-    })
-  }); 
+  });
 });
