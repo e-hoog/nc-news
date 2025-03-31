@@ -1,9 +1,13 @@
 import { Routes } from "react-router-dom";
+import Header from "./components/Header";
 
 function App() {
-  <>
-    <Routes></Routes>
-  </>;
+  return (
+    <>
+      <Header />
+      <Routes></Routes>
+    </>
+  );
 }
 
 export default App;
