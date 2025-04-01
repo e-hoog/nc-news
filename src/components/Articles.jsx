@@ -11,7 +11,7 @@ function Articles() {
         <header>
           <h1>All Articles</h1>
         </header>
-        <ArticleList sort_by="votes"></ArticleList>
+        <ArticleList perPage={10}></ArticleList>
       </section>
     </section>
   );

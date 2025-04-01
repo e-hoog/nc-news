@@ -4,7 +4,7 @@ import useApiRequest from "./useApiRequest";
 import { getAllArticles } from "./utils/api";
 import { CircularProgress } from "@mui/material";
 
-function ArticleList({ sort_by }) {
+function ArticleList({ sort_by, perPage }) {
   const apiParams = useMemo(() => {
     return { sort_by };
   }, []);
@@ -19,7 +19,7 @@ function ArticleList({ sort_by }) {
         <CircularProgress />
       ) : (
         articles.map((article, index) => {
-          if (index < 3) {
+          if (index < perPage) {
             return <ArticleCard key={article.article_id} article={article} />;
           }
         })
