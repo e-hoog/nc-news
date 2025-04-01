@@ -7,11 +7,12 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from "@mui/material/Box";
 
-function ArticleCard() {
+function ArticleCard({ article }) {
   const buttons = [
     <Button key="vote-up">⬆</Button>,
     <Button key="vote-down">⬇</Button>,
   ];
+  console.log(article);
   return (
     <div className="article-card-container">
       <Box
@@ -26,21 +27,28 @@ function ArticleCard() {
           {buttons}
         </ButtonGroup>
       </Box>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ width: 345 }}>
         <CardActionArea>
           <CardMedia
             sx={{ height: 140 }}
-            image="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            title="article placeholder"
+            image={article.article_img_url}
+            title={article.title}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Article
+            <Typography
+              gutterBottom
+              sx={{ color: "text.secondary", fontSize: 14 }}
+            >
+              {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
             </Typography>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et
+            <Typography gutterBottom variant="h5" component="div">
+              {article.title}
+            </Typography>
+            <Typography sx={{ color: "text.secondary" }}>
+              Author: {article.author}
+            </Typography>
+            <Typography variant="body3" sx={{ color: "text.secondary" }}>
+              {article.created_at.slice(0, 10)}
             </Typography>
           </CardContent>
         </CardActionArea>

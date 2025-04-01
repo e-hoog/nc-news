@@ -43,4 +43,5 @@
 .article-card-container {
   display: flex;
   align-items: center;
+  padding-bottom: 10px;
 }
