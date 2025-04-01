@@ -4,9 +4,9 @@ import useApiRequest from "./useApiRequest";
 import { getAllArticles } from "./utils/api";
 import { CircularProgress } from "@mui/material";
 
-function ArticleList() {
+function ArticleList({ sort_by }) {
   const apiParams = useMemo(() => {
-    return { sort_by: "votes" };
+    return { sort_by };
   }, []);
   const {
     data: articles,

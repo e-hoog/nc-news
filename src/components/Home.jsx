@@ -11,7 +11,7 @@ function Home() {
         <header>
           <h1>Welcome to NC News</h1>
         </header>
-        <ArticleList></ArticleList>
+        <ArticleList sort_by="votes"></ArticleList>
       </section>
     </section>
   );
