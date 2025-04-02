@@ -1,21 +1,28 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { getArticleById } from "./utils/api";
+import { getArticleById, getCommentsByArticleId } from "./utils/api";
 import useApiRequest from "./useApiRequest";
 import { CircularProgress } from "@mui/material";
+import CommentCard from "./CommentCard";
 
 function Article() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { article_id } = useParams();
   const {
     data: article,
-    isLoading,
-    err,
+    isLoading: isArticleLoading,
+    err: articleErr,
   } = useApiRequest(getArticleById, article_id);
+  const {
+    data: comments,
+    isLoading: isCommentsLoading,
+    err: commentsErr,
+  } = useApiRequest(getCommentsByArticleId, article_id);
+
   const formattedCreatedAt = new Date().toLocaleString("gb");
   return (
     <section className="default-page">
       <section className="article-box-container">
-        {isLoading ? (
+        {isArticleLoading ? (
           <CircularProgress />
         ) : (
           <>
@@ -33,6 +40,15 @@ function Article() {
               ></img>
             </div>
           </>
+        )}
+      </section>
+      <section className="comment-section-container">
+        {isCommentsLoading ? (
+          <CircularProgress />
+        ) : (
+          comments.map((comment) => {
+            return <CommentCard key={comment.comment_id} comment={comment} />;
+          })
         )}
       </section>
     </section>
