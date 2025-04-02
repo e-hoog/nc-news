@@ -1,0 +1,48 @@
+#root {
+  min-height: 100vh;
+  display: grid;
+  border-style: solid;
+  grid-template-columns: auto;
+  grid-template-rows: 150px auto;
+  grid-template-areas:
+    "header"
+    "body";
+}
+.default-header {
+  border-style: solid;
+  grid-area: header;
+  display: grid;
+  justify-content: space-around;
+  align-content: center;
+  grid-template-columns: 1fr 1fr;
+}
+.logo {
+  grid-column: 1;
+  justify-self: left;
+  padding-left: 25px;
+}
+.user {
+  grid-column: 2;
+  justify-self: right;
+  padding-right: 25px;
+}
+.page-with-nav {
+  display: grid;
+  border-style: solid;
+  grid-area: body;
+  grid-template-columns: 200px auto;
+  grid-template-areas: "navbar content";
+}
+.navbar {
+  grid-area: navbar;
+  border-style: solid;
+}
+.content-with-nav {
+  grid-area: content;
+}
+.article-card-container {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  padding-bottom: 10px;
+}
