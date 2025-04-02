@@ -13,21 +13,28 @@ function Article() {
   } = useApiRequest(getArticleById, article_id);
   const formattedCreatedAt = new Date().toLocaleString("gb");
   return (
-    <section>
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <>
-          <p>
-            {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
-          </p>
-          <h1>{article.title}</h1>
-          <p title={formattedCreatedAt}>{article.created_at.slice(0, 10)}</p>
-          <p>{article.author}</p>
-          <p>{article.body}</p>
-          <img src={article.article_img_url}></img>
-        </>
-      )}
+    <section className="default-page">
+      <section className="article-box-container">
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <p>
+              {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+            </p>
+            <h1>{article.title}</h1>
+            <p title={formattedCreatedAt}>{article.created_at.slice(0, 10)}</p>
+            <p>{article.author}</p>
+            <p>{article.body}</p>
+            <div className="article-image-container">
+              <img
+                className="article-box-image"
+                src={article.article_img_url}
+              ></img>
+            </div>
+          </>
+        )}
+      </section>
     </section>
   );
 }
