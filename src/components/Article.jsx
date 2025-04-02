@@ -1,20 +1,33 @@
 import { useParams, useSearchParams } from "react-router-dom";
+import { getArticleById } from "./utils/api";
+import useApiRequest from "./useApiRequest";
+import { CircularProgress } from "@mui/material";
 
 function Article() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { article_id } = useParams();
+  const {
+    data: article,
+    isLoading,
+    err,
+  } = useApiRequest(getArticleById, article_id);
+  const formattedCreatedAt = new Date().toLocaleString("gb");
   return (
     <section>
-      <h1>Article Title</h1>
-      <p>Date Posted</p>
-      <p>Author</p>
-      <p>Topic</p>
-      <p>
-        Body: Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-        distinctio quam culpa optio autem. Qui sint saepe quasi error,
-        exercitationem corporis sapiente repellendus voluptate, recusandae nihil
-        quidem pariatur ab quaerat.
-      </p>
+      {isLoading ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <p>
+            {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
+          </p>
+          <h1>{article.title}</h1>
+          <p title={formattedCreatedAt}>{article.created_at.slice(0, 10)}</p>
+          <p>{article.author}</p>
+          <p>{article.body}</p>
+          <img src={article.article_img_url}></img>
+        </>
+      )}
     </section>
   );
 }
