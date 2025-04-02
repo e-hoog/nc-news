@@ -11,4 +11,10 @@ const getAllArticles = (params) => {
     })
 }
 
-export { getAllArticles }
+const getArticleById = (article_id) => {
+    return api.get(`/api/articles/${article_id}`).then(({ data: { article } }) => {
+        return article
+    })
+}
+
+export { getAllArticles, getArticleById }

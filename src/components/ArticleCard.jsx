@@ -6,13 +6,17 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
 
 function ArticleCard({ article }) {
   const buttons = [
     <Button key="vote-up">⬆</Button>,
     <Button key="vote-down">⬇</Button>,
   ];
-  console.log(article);
+  const navigate = useNavigate();
+  function handleCardClick() {
+    navigate(`/articles/${article.article_id}`);
+  }
   return (
     <div className="article-card-container">
       <Box
@@ -28,7 +32,7 @@ function ArticleCard({ article }) {
         </ButtonGroup>
       </Box>
       <Card sx={{ width: 345 }}>
-        <CardActionArea>
+        <CardActionArea onClick={handleCardClick}>
           <CardMedia
             sx={{ height: 140 }}
             image={article.article_img_url}

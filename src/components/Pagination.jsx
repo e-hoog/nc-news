@@ -6,6 +6,7 @@ function Pagination({ items, perPage, page, setPage }) {
   const [prevDisabled, setPrevDisabled] = useState(true);
   function handlePrevClick() {
     setNextDisabled("");
+    window.scrollTo(0, 0);
     if (page - 1 === 1) {
       setPrevDisabled(true);
       setPage(page - 1);
@@ -16,6 +17,7 @@ function Pagination({ items, perPage, page, setPage }) {
   }
   function handleNextClick() {
     setPrevDisabled("");
+    window.scrollTo(0, 0);
     if (items < (page + 1) * perPage) {
       setNextDisabled(true);
       setPage(page + 1);
