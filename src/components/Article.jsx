@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { getArticleById, getCommentsByArticleId } from "./utils/api";
+import { getArticleById, getCommentsByArticleId } from "../utils/api";
 import useApiRequest from "./useApiRequest";
 import { Alert, ButtonGroup, CircularProgress, Divider } from "@mui/material";
 import CommentCard from "./CommentCard";

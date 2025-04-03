@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import ArticleCard from "./ArticleCard";
 import useApiRequest from "./useApiRequest";
-import { getAllArticles } from "./utils/api";
+import { getAllArticles } from "../utils/api";
 import { CircularProgress } from "@mui/material";
 import Pagination from "./Pagination";
 
