@@ -1,29 +1,37 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { getArticleById } from "./utils/api";
+import { getArticleById, getCommentsByArticleId } from "./utils/api";
 import useApiRequest from "./useApiRequest";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Divider } from "@mui/material";
+import CommentCard from "./CommentCard";
 
 function Article() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { article_id } = useParams();
   const {
     data: article,
-    isLoading,
-    err,
+    isLoading: isArticleLoading,
+    err: articleErr,
   } = useApiRequest(getArticleById, article_id);
-  const formattedCreatedAt = new Date().toLocaleString("gb");
+  const {
+    data: comments,
+    isLoading: isCommentsLoading,
+    err: commentsErr,
+  } = useApiRequest(getCommentsByArticleId, article_id);
+
   return (
     <section className="default-page">
-      <section className="article-box-container">
-        {isLoading ? (
-          <CircularProgress />
-        ) : (
+      {isArticleLoading ? (
+        <CircularProgress />
+      ) : (
+        <section className="article-box-container">
           <>
             <p>
               {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
             </p>
             <h1>{article.title}</h1>
-            <p title={formattedCreatedAt}>{article.created_at.slice(0, 10)}</p>
+            <p title={new Date(article.created_at).toLocaleString()}>
+              {article.created_at.slice(0, 10)}
+            </p>
             <p>{article.author}</p>
             <p>{article.body}</p>
             <div className="article-image-container">
@@ -33,6 +41,16 @@ function Article() {
               ></img>
             </div>
           </>
+        </section>
+      )}
+      <Divider />
+      <section className="comment-section-container">
+        {isCommentsLoading ? (
+          <CircularProgress />
+        ) : (
+          comments.map((comment) => {
+            return <CommentCard key={comment.comment_id} comment={comment} />;
+          })
         )}
       </section>
     </section>

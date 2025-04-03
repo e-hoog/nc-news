@@ -1,5 +1,4 @@
 import ArticleList from "./ArticleList";
-import NavBar from "./NavBar";
 
 function Articles() {
   return (
