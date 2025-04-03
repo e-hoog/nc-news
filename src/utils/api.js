@@ -23,7 +23,7 @@ const getCommentsByArticleId = (article_id) => {
     })
 }
 const getAllUsers = () => {
-    return api.get('/api/articles').then(({ data: { users } }) => {
+    return api.get('/api/users').then(({ data: { users } }) => {
         return users
     })
 }

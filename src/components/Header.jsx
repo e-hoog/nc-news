@@ -82,8 +82,8 @@ function Header() {
           <Link to="/">
             <img src="/src/assets/logo.png" className="logo"></img>
           </Link>
-          <Link to="/users" className="user-link">
-            User Profile
+          <Link to="/users">
+            <button className="login-button">Log In</button>
           </Link>
         </Toolbar>
       </AppBar>

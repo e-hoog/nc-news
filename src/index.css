@@ -109,3 +109,19 @@ h2 {
 .toolbar {
   justify-content: space-between;
 }
+.user-card {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  border: outset paleturquoise;
+  border-width: 2px;
+  max-width: 95%;
+  height: 100px;
+  justify-content: space-between;
+  padding: 5px;
+}
+.login-photo {
+  object-fit: cover;
+  width: 95px;
+  height: 95px;
+}
