@@ -18,7 +18,6 @@ function ArticleCard({ article }) {
   const [voteError, setVoteError] = useState(null);
   return (
     <>
-      {" "}
       {voteError ? (
         <div>
           <Alert severity="error">{voteError}</Alert>
@@ -45,7 +44,7 @@ function ArticleCard({ article }) {
             />
           </ButtonGroup>
         </Box>
-        <Card sx={{ width: 345 }}>
+        <Card className="article-card" sx={{ width: 345 }}>
           <CardActionArea onClick={handleCardClick}>
             <CardMedia
               sx={{ height: 140 }}

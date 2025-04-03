@@ -24,7 +24,7 @@ function Votes({ votes, article_id, setVoteError }) {
   }
 
   return (
-    <div>
+    <>
       <Button onClick={handleUpvote} key={article_id + "vote-up"}>
         ⬆
       </Button>
@@ -32,7 +32,7 @@ function Votes({ votes, article_id, setVoteError }) {
       <Button onClick={handleDownvote} key={article_id + "vote-down"}>
         ⬇
       </Button>
-    </div>
+    </>
   );
 }
 

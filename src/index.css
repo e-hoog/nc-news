@@ -46,12 +46,17 @@ h2 {
   flex-shrink: 2;
   max-width: 75%;
 }
+.article-card {
+  max-width: 75%;
+  width: 690px !important;
+}
 .article-box-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   border: outset paleturquoise;
   max-width: 700px;
+  max-width: 98%;
   justify-self: center;
 }
 .article-box-container > * {
@@ -81,6 +86,14 @@ h2 {
   display: flex;
   border: outset paleturquoise;
   border-width: 2px;
+}
+.votes-horizontal {
+  display: flex;
+  border: outset paleturquoise;
+  border-width: 2px;
+}
+.votes-horizontal > .votes {
+  padding: 15px;
 }
 .votes {
   align-self: center;
