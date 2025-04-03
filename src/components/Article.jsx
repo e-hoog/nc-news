@@ -18,19 +18,20 @@ function Article() {
     err: commentsErr,
   } = useApiRequest(getCommentsByArticleId, article_id);
 
-  const formattedCreatedAt = new Date().toLocaleString("gb");
   return (
     <section className="default-page">
-      <section className="article-box-container">
-        {isArticleLoading ? (
-          <CircularProgress />
-        ) : (
+      {isArticleLoading ? (
+        <CircularProgress />
+      ) : (
+        <section className="article-box-container">
           <>
             <p>
               {article.topic.charAt(0).toUpperCase() + article.topic.slice(1)}
             </p>
             <h1>{article.title}</h1>
-            <p title={formattedCreatedAt}>{article.created_at.slice(0, 10)}</p>
+            <p title={new Date(article.created_at).toLocaleString()}>
+              {article.created_at.slice(0, 10)}
+            </p>
             <p>{article.author}</p>
             <p>{article.body}</p>
             <div className="article-image-container">
@@ -40,8 +41,8 @@ function Article() {
               ></img>
             </div>
           </>
-        )}
-      </section>
+        </section>
+      )}
       <Divider />
       <section className="comment-section-container">
         {isCommentsLoading ? (
