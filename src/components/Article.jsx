@@ -1,7 +1,7 @@
 import { useParams, useSearchParams } from "react-router-dom";
 import { getArticleById, getCommentsByArticleId } from "./utils/api";
 import useApiRequest from "./useApiRequest";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Divider } from "@mui/material";
 import CommentCard from "./CommentCard";
 
 function Article() {
@@ -42,6 +42,7 @@ function Article() {
           </>
         )}
       </section>
+      <Divider />
       <section className="comment-section-container">
         {isCommentsLoading ? (
           <CircularProgress />
