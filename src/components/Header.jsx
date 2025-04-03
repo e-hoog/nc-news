@@ -69,7 +69,7 @@ function Header() {
     <section className="header">
       <CssBaseline />
       <AppBar position="absolute">
-        <Toolbar>
+        <Toolbar className="toolbar">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -81,6 +81,9 @@ function Header() {
           </IconButton>
           <Link to="/">
             <img src="/src/assets/logo.png" className="logo"></img>
+          </Link>
+          <Link to="/users" className="user-link">
+            User Profile
           </Link>
         </Toolbar>
       </AppBar>
@@ -116,7 +119,7 @@ function Header() {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              marginTop: 8,
+              marginTop: 8.5,
             },
           }}
           open

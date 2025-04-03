@@ -68,6 +68,7 @@ h2 {
   object-fit: fill;
 }
 .logo {
+  margin-top: 10px;
   max-height: 50px;
   object-fit: fill;
   padding: 5px;
@@ -98,4 +99,13 @@ h2 {
 .votes {
   align-self: center;
   justify-self: center;
+}
+.user-link {
+  padding: 7px;
+  background-color: white;
+  color: black;
+  flex-shrink: 1;
+}
+.toolbar {
+  justify-content: space-between;
 }
