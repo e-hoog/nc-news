@@ -5,7 +5,6 @@ import { Button } from "@mui/material";
 function Votes({ votes, article_id, setVoteError }) {
   const [votesCount, setVotesCount] = useState(votes);
   function handleUpvote() {
-    console.log("+1");
     setVotesCount((currentVotesCount) => currentVotesCount + 1);
     setVoteError(null);
     patchArticleVotesById(article_id, 1).catch((err) => {
@@ -14,7 +13,6 @@ function Votes({ votes, article_id, setVoteError }) {
     });
   }
   function handleDownvote() {
-    console.log("-1");
     setVotesCount((currentVotesCount) => currentVotesCount - 1);
     setVoteError(null);
     patchArticleVotesById(article_id, -1).catch((err) => {
