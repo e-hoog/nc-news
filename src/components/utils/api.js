@@ -28,5 +28,10 @@ const patchArticleVotesById = (article_id, inc_votes) => {
         return article
     })
 }
+const postCommentByArticleId = (article_id, body) => {
+    return api.post(`api/articles/${article_id}/comments`, body).then(({ data: { comment } }) => {
+        return comment
+    })
+}
 
-export { getAllArticles, getArticleById, getCommentsByArticleId, patchArticleVotesById }
+export { getAllArticles, getArticleById, getCommentsByArticleId, patchArticleVotesById, postCommentByArticleId }
