@@ -1,7 +1,6 @@
 import { Divider } from "@mui/material";
 
 function CommentCard({ comment }) {
-  console.log(comment);
   return (
     <div className="comment-card">
       <h2>{comment.author}</h2>
