@@ -100,11 +100,12 @@ h2 {
   align-self: center;
   justify-self: center;
 }
-.user-link {
-  padding: 7px;
+.login-button {
+  padding: 10px;
   background-color: white;
   color: black;
   flex-shrink: 1;
+  cursor: pointer;
 }
 .toolbar {
   justify-content: space-between;

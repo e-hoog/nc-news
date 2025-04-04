@@ -82,7 +82,7 @@ function Header() {
           <Link to="/">
             <img src="/src/assets/logo.png" className="logo"></img>
           </Link>
-          <Link to="/users">
+          <Link to="/login">
             <button className="login-button">Log In</button>
           </Link>
         </Toolbar>
@@ -127,11 +127,6 @@ function Header() {
           {drawer}
         </Drawer>
       </Box>
-    </section>
-  );
-  return (
-    <section className="default-header">
-      <p className="user">Username</p>
     </section>
   );
 }
