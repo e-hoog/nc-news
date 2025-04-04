@@ -40,5 +40,8 @@ const postCommentByArticleId = (article_id, body) => {
         return comment
     })
 }
+const deleteCommentById = (comment_id) => {
+    return api.delete(`api/comments/${comment_id}`)
+}
 
-export { getAllArticles, getArticleById, getCommentsByArticleId, getAllUsers, patchArticleVotesById, postCommentByArticleId }
+export { getAllArticles, getArticleById, getCommentsByArticleId, getAllUsers, patchArticleVotesById, postCommentByArticleId, deleteCommentById }
