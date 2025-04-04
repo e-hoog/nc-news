@@ -5,11 +5,11 @@ import { getAllArticles } from "../utils/api";
 import { CircularProgress } from "@mui/material";
 import Pagination from "./Pagination";
 
-function ArticleList({ sort_by, perPage }) {
+function ArticleList({ sort_by, perPage, topic }) {
   const [page, setPage] = useState(1);
   const apiParams = useMemo(() => {
-    return { sort_by };
-  }, []);
+    return { sort_by, topic };
+  }, [topic]);
   const {
     data: articles,
     isLoading,
