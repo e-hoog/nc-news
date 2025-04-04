@@ -19,7 +19,7 @@ const useApiRequest = (apiFunc, ...args) => {
         setIsLoading(false);
       });
   }, [...args]);
-  return { data, isLoading, error };
+  return { data, isLoading, error, setData };
 };
 
 export default useApiRequest;

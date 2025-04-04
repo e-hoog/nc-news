@@ -27,6 +27,7 @@ h2 {
     "body";
 }
 .default-page {
+  padding: 5px;
   margin-top: 64px;
   height: 100%;
   width: 100%;
@@ -155,4 +156,8 @@ h2 {
 }
 .user-profile-image {
   max-width: 400px;
+}
+#comment-text {
+  resize: none;
+  width: 100%;
 }

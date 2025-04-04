@@ -19,6 +19,9 @@ const getArticleById = (article_id) => {
 
 const getCommentsByArticleId = (article_id) => {
     return api.get(`/api/articles/${article_id}/comments`).then(({ data: { comments } }) => {
+        comments.sort((a, b) => {
+            return new Date(b.created_at) - new Date(a.created_at);
+        });
         return comments
     })
 }

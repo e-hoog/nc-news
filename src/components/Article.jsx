@@ -4,7 +4,8 @@ import useApiRequest from "./useApiRequest";
 import { Alert, ButtonGroup, CircularProgress, Divider } from "@mui/material";
 import CommentCard from "./CommentCard";
 import Votes from "./Votes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import PostComment from "./PostComment";
 
 function Article() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,6 +19,7 @@ function Article() {
     data: comments,
     isLoading: isCommentsLoading,
     err: commentsErr,
+    setData: setComments,
   } = useApiRequest(getCommentsByArticleId, article_id);
   const [voteError, setVoteError] = useState(null);
   return (
@@ -60,6 +62,14 @@ function Article() {
         </section>
       )}
       <Divider />
+      {isArticleLoading ? null : (
+        <section>
+          <PostComment
+            article_id={article.article_id}
+            setComments={setComments}
+          />
+        </section>
+      )}
       <section className="comment-section-container">
         {isCommentsLoading ? (
           <CircularProgress />
