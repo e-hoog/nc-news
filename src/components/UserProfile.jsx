@@ -21,7 +21,7 @@ function UserProfile() {
         <>
           <h1>Welcome {user.name}</h1>
           <div className="user-profile">
-            <img src={user.avatar_url}></img>
+            <img src={user.avatar_url} className="user-profile-image"></img>
             <h2>{user.username}</h2>
             <Button onClick={handleLogOut} variant="outlined">
               Log Out

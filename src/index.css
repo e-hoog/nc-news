@@ -107,6 +107,21 @@ h2 {
   flex-shrink: 1;
   cursor: pointer;
 }
+.user-button {
+  display: flex;
+  padding: 2px;
+  background-color: white;
+  flex-shrink: 1;
+  align-items: center;
+  justify-content: center;
+  border: solid black 1.5px;
+}
+.user-button-image {
+  object-fit: cover;
+  max-width: 40px;
+  max-height: 40px;
+  aspect-ratio: 1 / 1;
+}
 .toolbar {
   justify-content: space-between;
 }
@@ -125,4 +140,19 @@ h2 {
   object-fit: cover;
   width: 95px;
   height: 95px;
+}
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border: outset paleturquoise;
+  border-width: 2px;
+  padding: 10px;
+  max-width: 500px;
+  justify-self: center;
+}
+.user-profile-image {
+  max-width: 400px;
 }
