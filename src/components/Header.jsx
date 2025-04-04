@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,12 +12,14 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/User";
 
 const drawerWidth = 240;
 
 function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const { user } = useContext(UserContext);
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -82,9 +84,15 @@ function Header() {
           <Link to="/">
             <img src="/src/assets/logo.png" className="logo"></img>
           </Link>
-          <Link to="/login">
-            <button className="login-button">Log In</button>
-          </Link>
+          {user ? (
+            <Link to="/user" className="user-button">
+              <img src={user.avatar_url} className="user-button-image"></img>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <button className="login-button">Log In</button>
+            </Link>
+          )}
         </Toolbar>
       </AppBar>
       <Box
