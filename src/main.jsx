@@ -3,10 +3,13 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/User.jsx";
+import { TopicsProvider } from "./contexts/Topics.jsx";
 createRoot(document.getElementById("root")).render(
-  <UserProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </UserProvider>
+  <TopicsProvider>
+    <UserProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UserProvider>
+  </TopicsProvider>
 );
