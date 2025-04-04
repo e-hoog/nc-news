@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { patchArticleVotesById } from "./utils/api";
+import { patchArticleVotesById } from "../utils/api";
 import { Button } from "@mui/material";
 
 function Votes({ votes, article_id, setVoteError }) {

@@ -27,6 +27,7 @@ h2 {
     "body";
 }
 .default-page {
+  padding: 5px;
   margin-top: 64px;
   height: 100%;
   width: 100%;
@@ -68,6 +69,7 @@ h2 {
   object-fit: fill;
 }
 .logo {
+  margin-top: 10px;
   max-height: 50px;
   object-fit: fill;
   padding: 5px;
@@ -98,4 +100,64 @@ h2 {
 .votes {
   align-self: center;
   justify-self: center;
+}
+.login-button {
+  padding: 10px;
+  background-color: white;
+  color: black;
+  flex-shrink: 1;
+  cursor: pointer;
+}
+.user-button {
+  display: flex;
+  padding: 2px;
+  background-color: white;
+  flex-shrink: 1;
+  align-items: center;
+  justify-content: center;
+  border: solid black 1.5px;
+}
+.user-button-image {
+  object-fit: cover;
+  max-width: 40px;
+  max-height: 40px;
+  aspect-ratio: 1 / 1;
+}
+.toolbar {
+  justify-content: space-between;
+}
+.user-card {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  border: outset paleturquoise;
+  border-width: 2px;
+  max-width: 95%;
+  height: 100px;
+  justify-content: space-between;
+  padding: 5px;
+}
+.login-photo {
+  object-fit: cover;
+  width: 95px;
+  height: 95px;
+}
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border: outset paleturquoise;
+  border-width: 2px;
+  padding: 10px;
+  max-width: 500px;
+  justify-self: center;
+}
+.user-profile-image {
+  max-width: 400px;
+}
+#comment-text {
+  resize: none;
+  width: 100%;
 }
