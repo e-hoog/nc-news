@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { Alert, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import useApiRequest from "./useApiRequest";
 import { postCommentByArticleId } from "../utils/api";
 
 function PostComment({ article_id, setComments }) {

@@ -4,7 +4,7 @@ import useApiRequest from "./useApiRequest";
 import { Alert, ButtonGroup, CircularProgress, Divider } from "@mui/material";
 import CommentCard from "./CommentCard";
 import Votes from "./Votes";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PostComment from "./PostComment";
 
 function Article() {
