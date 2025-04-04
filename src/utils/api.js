@@ -30,6 +30,11 @@ const getAllUsers = () => {
         return users
     })
 }
+const getAllTopics = () => {
+    return api.get('/api/topics').then(({ data: { topics } }) => {
+        return topics
+    })
+}
 const patchArticleVotesById = (article_id, inc_votes) => {
     return api.patch(`api/articles/${article_id}`, { inc_votes }).then(({ data: { article } }) => {
         return article
@@ -44,4 +49,4 @@ const deleteCommentById = (comment_id) => {
     return api.delete(`api/comments/${comment_id}`)
 }
 
-export { getAllArticles, getArticleById, getCommentsByArticleId, getAllUsers, patchArticleVotesById, postCommentByArticleId, deleteCommentById }
+export { getAllArticles, getArticleById, getCommentsByArticleId, getAllUsers, getAllTopics, patchArticleVotesById, postCommentByArticleId, deleteCommentById }

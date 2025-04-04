@@ -13,6 +13,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/User";
+import { TopicsContext } from "../contexts/Topics";
+import { CircularProgress } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -20,6 +22,7 @@ function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const { user } = useContext(UserContext);
+  const { topics, isTopicsLoading } = useContext(TopicsContext);
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -57,13 +60,23 @@ function Header() {
       </List>
       <Divider />
       <List>
-        {["Topic 1", "Topic 2"].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {isTopicsLoading || !topics ? (
+          <CircularProgress />
+        ) : (
+          topics.map((topic) => {
+            return (
+              <ListItem key={topic.slug} disablePadding>
+                <ListItemButton href={`/articles?topic=${topic.slug}`}>
+                  <ListItemText
+                    primary={
+                      topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })
+        )}
       </List>
     </div>
   );
